@@ -87,8 +87,10 @@
       <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let element">
-            <button mat-icon-button (click)="updateUser(element.userId)"><mat-icon>launch</mat-icon></button>
-            <button mat-icon-button color="warn" (click)="delete(element.userId)"><mat-icon>delete_outline</mat-icon></button>
+            <div class="user-button-row">
+              <button mat-raised-button color="primary" (click)="updateUser(element.userId)" type="button">Edit</button>
+              <button mat-raised-button color="warn" (click)="delete(element.userId)" type="button">Delete</button>
+            </div>
           </td>
         </ng-container>
 

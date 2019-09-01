@@ -93,6 +93,7 @@ export class UsersComponent implements OnInit {
       .subscribe(
         response => {
                   this.getUserDetails();
+                  this.formValue.resetForm();
                   this.router.navigateByUrl('user');
                 }
         , error => console.error(error)

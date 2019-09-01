@@ -37,7 +37,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 ## Install angular material
-npm install --save @angular/material @angular/cdk @angular/animations
+npm install --save @angular/material@7.3.7 @angular/cdk@7.3.7 @angular/animations@7.3.7
 
 
 ## Add Theme

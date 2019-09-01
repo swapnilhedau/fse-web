@@ -48,3 +48,22 @@ add below theme import to styles.css
 add below styles in index.html
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+## --dry-run
+use this flag to view what will be generated
+
+
+## create domain class
+> ng g class /domain/user
+> ng g class /domain/project
+> ng g class /domain/task
+
+## create component
+> ng g c users
+> ng g c projects
+> ng g c tasks
+
+## create service 
+> ng g service /service/user
+> ng g service /service/project
+> ng g service /service/task
+

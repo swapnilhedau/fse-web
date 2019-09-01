@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="projectform-container">
+
+      <form #projectForm="ngForm" (ngSubmit)="submitProjectForm(projectForm)">
+
+        <input type="hidden" id="projectId" name="projectId" [(ngModel)]="project.projectId">
+        <input type="hidden" id="projectStatus" name="projectStatus" [(ngModel)]="project.projectStatus">
+
+        <mat-list>
+          <mat-list-item>
+              &nbsp; Project Name : &nbsp;
+            <mat-form-field class="project-full-width">
+              <input matInput placeholder="Project Name" id="projectNameId" name="projectName" required
+              #projectName="ngModel" [(ngModel)]="project.projectName">
+            </mat-form-field>
+
+            <mat-error [hidden]="!projectForm.submitted || projectName.valid">
+                Project Name is <strong>required</strong>
+            </mat-error>
+          </mat-list-item>
+
+          <mat-list-item>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Start Date : &nbsp;
+              <mat-form-field>
+                  <input matInput [matDatepicker]="pickerStart" placeholder="Choose a start date" [min]="minStartDate"
+                  name="startDate" required
+                  [(ngModel)]="project.startDate">
+                  <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+                  <mat-datepicker #pickerStart></mat-datepicker>
+                </mat-form-field>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              End Date : &nbsp;
+              <mat-form-field>
+                  <input matInput [matDatepicker]="pickerEnd" placeholder="Choose a end date" [min]="minEndDate"
+                  name="endDate" required
+                  [(ngModel)]="project.endDate">
+                  <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                  <mat-datepicker #pickerEnd></mat-datepicker>
+                </mat-form-field>
+          </mat-list-item>
+
+          <mat-list-item>
+            <mat-label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Priority : </mat-label> &nbsp;
+            0<mat-slider min="1" max="30" [(ngModel)]="project.priority" name="priority" tickInterval="1" step="1" thumbLabel></mat-slider>30
+          </mat-list-item>
+
+          <mat-list-item>
+              Manager Name : &nbsp;
+              <mat-form-field class="project-full-width">
+
+              <mat-select [(ngModel)]="project.userId" name="userId">
+                  <mat-option *ngFor="let user of users" [value]="user.userId">
+                    {{user.firstName}} {{user.lastName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-list-item>
+
+          <mat-list-item>
+              <div class="project-button-row" *ngIf="!edit">
+                <button mat-raised-button color="primary">Add</button>
+                <button mat-raised-button color="warn" (click)='this.projectForm.resetForm()' type="button">Reset</button>
+              </div>
+              <div class="project-button-row" *ngIf="edit">
+                  <button mat-raised-button color="primary">Save</button>
+                  <button mat-raised-button color="warn" (click)='cancelEdit(projectForm)' type="button">Cancel</button>
+                </div>
+          </mat-list-item>
+
+        </mat-list>
+
+      </form>
+  </div>
+
+      <div class="card-body">
+          <mat-form-field class="project-full-width">
+            <input matInput class="form-control" [(ngModel)]="projectSearchText" placeholder="Search..."/>
+          </mat-form-field>
+          <br>
+          Sort By :
+          <button mat-raised-button color="primary" (click)="sortProjectBy('SD')">Start Date</button> &nbsp;
+          <button mat-raised-button color="primary" (click)="sortProjectBy('ED')">End Date</button> &nbsp;
+          <button mat-raised-button color="primary" (click)="sortProjectBy('PR')">Priority</button> &nbsp;
+          <button mat-raised-button color="primary" (click)="sortProjectBy('PS')">Completed</button>
+          <br><br>
+
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <tbody>
+                  <tr *ngFor="let project of projects | projectfilter: projectSearchText">
+                      <td>
+                            Project : {{ project.projectName }} <br><br>
+                            No of Tasks : {{ project.noOfTasks }} &nbsp; Completed : {{ project.completed }} <br>
+                            Status : {{ project.projectStatus}} <br>
+                            Start Date : {{ project.startDate | date }} &nbsp; &nbsp; End Date : {{ project.endDate | date }} <br>
+
+                      </td>
+                      <td> Priority : {{ project.priority }}</td>
+                      <td nowrap>
+                          <button mat-raised-button color="primary" (click)='updateProject(project.projectId)'>Update</button> <br><br>
+                          <button *ngIf="project.projectStatus != 'SUSPENDED'" mat-raised-button color="warn" (click)='suspendProject(project.projectId)'>Suspend</button>
+                      </tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+
+</div>

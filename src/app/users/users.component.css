@@ -1,0 +1,32 @@
+table {
+  width: 100%;
+}
+
+mat-form-field {
+  margin-right: 12px;
+}
+
+.userform-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.userform-container > * {
+  width: 100%;
+}
+
+.user-button-row button,
+.user-button-row a {
+  margin-right: 8px;
+}
+
+.user-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.user-full-width {
+  width: 60%;
+}
+

@@ -1,4 +1,20 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<app-users></app-users>
+<div class="container">
+  <mat-toolbar>
+    <span class="fill-remaining-space"></span>
+    <span>Project Management</span>
+    <span class="fill-remaining-space"></span>
+  </mat-toolbar>
+  <nav class="navbar navbar-dark bg-primary">
+      <!-- Navbar content -->
+      <a class="navbar-brand" routerLinkActive="active" [routerLink]="'/project'">Add Project</a>
+      <a class="navbar-brand" routerLinkActive="active" [routerLink]="'/task'"> Add Task</a>
+      <a class="navbar-brand" routerLinkActive="active" [routerLink]="'/user'"> Add User</a>
+      <a class="navbar-brand" routerLinkActive="active" [routerLink]="'/viewtask'">View Task</a>
+
+    </nav>
+</div>
+
+
 
 <router-outlet></router-outlet>

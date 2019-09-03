@@ -21,6 +21,6 @@ jobs:
       run: |
         npm install
         npm run build --if-present
-        npm test-headless
+        npm run test-headless
       env:
         CI: true

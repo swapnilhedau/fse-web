@@ -51,6 +51,12 @@ add below styles in index.html
 ## --dry-run
 use this flag to view what will be generated
 
+## Changes to run tests without actually opening chrome browser
+add below in package.json file under scripts
+"test-headless": "ng test --watch=false --browsers=ChromeHeadless"
+
+> ng test-headless
+
 
 ## create domain class
 > ng g class /domain/user

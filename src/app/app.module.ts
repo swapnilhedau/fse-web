@@ -8,6 +8,7 @@ import { FormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UsersComponent } from './users/users.component';
 import { ProjectsComponent } from './projects/projects.component';
+import { TasksComponent } from './tasks/tasks.component';
 import { ProjectfilterPipe } from './filter/projectfilter.pipe';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -26,6 +27,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatSelectModule} from '@angular/material/select';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 
@@ -34,7 +36,8 @@ import {MatSelectModule} from '@angular/material/select';
     AppComponent,
     UsersComponent,
     ProjectsComponent,
-    ProjectfilterPipe
+    ProjectfilterPipe,
+    TasksComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSliderModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

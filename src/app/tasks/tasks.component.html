@@ -1,0 +1,120 @@
+<div class="container">
+
+  <div class="userform-container">
+
+    <form #taskForm=ngForm (ngSubmit)="submitTaskForm(taskForm)">
+
+      <input type="hidden" id="status" name="status" [(ngModel)]="task.status">
+
+      <mat-list>
+          <mat-list-item>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              Project : &nbsp;
+              <mat-form-field class="task-full-width">
+
+              <mat-select [(ngModel)]="task.projectId" name="projectId" #project="ngModel">
+                  <mat-option *ngFor="let project of projects" [value]="project.projectId">
+                    {{project.projectName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <!--
+              <mat-error [hidden]="!taskForm.submitted || project.invalid">
+                  Project is <strong>required</strong>
+              </mat-error>
+              -->
+          </mat-list-item>
+
+          <mat-list-item>
+              &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              Task : &nbsp;
+            <mat-form-field class="task-full-width">
+              <input matInput placeholder="Task" id="taskNameId" name="taskName" required
+              #taskName="ngModel"
+              [(ngModel)]="task.task">
+            </mat-form-field>
+
+            <mat-error [hidden]="!taskForm.submitted || taskName.valid">
+                Task is <strong>required</strong>
+            </mat-error>
+          </mat-list-item>
+
+          <mat-list-item>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              <mat-checkbox name="isParentTask" #parentTaskChk [(ngModel)]="isParentTask">Parent Task</mat-checkbox>
+          </mat-list-item>
+
+          <mat-list-item>
+              &nbsp; &nbsp; &nbsp; &nbsp; Priority : &nbsp;
+              0<mat-slider [disabled]="parentTaskChk.checked" min="0" max="30" [(ngModel)]="task.priority" name="priority" tickInterval="1" step="1" thumbLabel></mat-slider>30
+          </mat-list-item>
+
+          <mat-list-item>
+              Parent Task : &nbsp;
+              <mat-form-field class="task-full-width">
+              <mat-select [(ngModel)]="task.parentId" name="parentId" [disabled]="parentTaskChk.checked" #parentTask="ngModel">
+                  <mat-option *ngFor="let parentTask of parentTasks" [value]="parentTask.parentId">
+                    {{parentTask.parentTask}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <!--
+              <mat-error [hidden]="!taskForm.submitted || parentTask.invalid || parentTaskChk.checked">
+                  Parent Task is <strong>required</strong>
+              </mat-error>
+              -->
+            </mat-list-item>
+
+            <mat-list-item>
+                &nbsp; Start Date : &nbsp;
+                <mat-form-field>
+                    <input matInput [matDatepicker]="pickerStart" placeholder="Choose a start date" [min]="minStartDate"
+                    name="startDate" required
+                    [(ngModel)]="task.startDate"
+                    [disabled]="parentTaskChk.checked">
+                    <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerStart></mat-datepicker>
+                  </mat-form-field>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                End Date : &nbsp;
+                <mat-form-field>
+                    <input matInput [matDatepicker]="pickerEnd" placeholder="Choose a end date" [min]="minEndDate"
+                    name="endDate" required
+                    [(ngModel)]="task.endDate"
+                    [disabled]="parentTaskChk.checked">
+                    <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerEnd></mat-datepicker>
+                  </mat-form-field>
+            </mat-list-item>
+
+            <mat-list-item>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; User : &nbsp;
+                <mat-form-field class="task-full-width">
+
+                <mat-select [(ngModel)]="task.userId" name="userId" [disabled]="parentTaskChk.checked" #user="ngModel">
+                    <mat-option *ngFor="let user of users" [value]="user.userId">
+                      {{user.firstName}} {{user.lastName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <!--
+                <mat-error [hidden]="!taskForm.submitted || user.invalid || parentTaskChk.checked">
+                    User is <strong>required</strong>
+                </mat-error>
+                -->
+            </mat-list-item>
+
+            <mat-list-item>
+                <div class="task-button-row">
+                  <button mat-raised-button color="primary">Add Task</button>
+                  <button mat-raised-button color="warn" (click)='this.taskForm.resetForm()' type="button">Reset</button>
+                </div>
+            </mat-list-item>
+
+        </mat-list>
+
+    </form>
+    {{ taskForm.value | json }}
+  </div>
+
+</div>

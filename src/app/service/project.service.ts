@@ -16,13 +16,13 @@ export class ProjectService {
       'Cache-Control': 'no-cache'
       })
   };
+
   allProjectsAPIEndpoint = environment.apiUrl + environment.apiProjectPrefix + '/allProjects';
   suspendProjectAPIEndpoint = environment.apiUrl + environment.apiProjectPrefix + '/suspend';
   addProjectAPIEndpoint = environment.apiUrl + environment.apiProjectPrefix + '/add';
   editProjectAPIEndpoint = environment.apiUrl + environment.apiProjectPrefix + '/edit';
   projectNamesAPIEndpoint = environment.apiUrl + environment.apiProjectPrefix + '/names';
   projectByIdAPIEndpoint = environment.apiUrl + environment.apiProjectPrefix;
-
 
   constructor(private http: HttpClient) { }
 

@@ -73,3 +73,23 @@ add below in package.json file under scripts
 > ng g service /service/project
 > ng g service /service/task
 
+
+
+## Build docker image
+> cd fse-web
+> ng build --prod
+> docker build -t fse-web:latest
+
+## Run image
+> docker run --name fse-web -d -p 8080:80 fse-web:latest
+> docker container ls
+
+## check nginx container if app is deployed 
+> docker container exec -it <container_id> /bin/sh
+> cd /usr/share/nginx/local
+> ls 
+> less index.html
+
+## Push local image to docker hub registry
+> docker tag fse-web:latest swapnilhedau/fse-web:latest
+> docker push swapnilhedau/fse-web:latest

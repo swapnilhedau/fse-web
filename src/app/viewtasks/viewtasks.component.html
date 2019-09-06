@@ -1,0 +1,46 @@
+<div class="container">
+
+  <br><br>
+    <div class="viewtaskform-container">
+      Sort By :
+      <button mat-raised-button color="primary" (click)="sortViewTaskBy('SD')">Start Date</button> &nbsp;
+      <button mat-raised-button color="primary" (click)="sortViewTaskBy('ED')">End Date</button> &nbsp;
+      <button mat-raised-button color="primary" (click)="sortViewTaskBy('PR')">Priority</button> &nbsp;
+      <button mat-raised-button color="primary" (click)="sortViewTaskBy('PS')">Completed</button>
+      <br><br>
+
+      <mat-divider></mat-divider>
+
+      <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Parent</th>
+                <th>Priority</th>
+                <th>Start</th>
+                <th>End</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let viewTask of viewTasks">
+                  <td>{{viewTask.task.taskName}}</td>
+                  <td>{{viewTask.parentTask.parentTask}}</td>
+                  <td> {{viewTask.task.priority}} </td>
+                  <td> {{viewTask.task.startDate|date: 'dd/MM/yyyy'}} </td>
+                  <td> {{viewTask.task.endDate|date: 'dd/MM/yyyy'}} </td>
+                  <td nowrap >
+                    <div class="viewtasks-button-row">
+                      <button *ngIf="viewTask.task.status != 'CLOSE'" mat-raised-button color="primary" (click)="editTask(viewTask.task.taskId)" type="button">Edit</button>
+                      <button *ngIf="viewTask.task.status != 'CLOSE'" mat-raised-button color="warn" (click)="endTask(viewTask.task.taskId)" type="button">End Task</button>
+                    </div>
+                </td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+
+    </div>
+
+  </div>

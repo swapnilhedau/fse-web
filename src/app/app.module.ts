@@ -28,6 +28,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { ViewtasksComponent } from './viewtasks/viewtasks.component';
 
 
 
@@ -37,7 +38,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     UsersComponent,
     ProjectsComponent,
     ProjectfilterPipe,
-    TasksComponent
+    TasksComponent,
+    ViewtasksComponent
   ],
   imports: [
     BrowserModule,

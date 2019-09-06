@@ -21,6 +21,7 @@ export class TaskService {
   allParentTasksAPIEndpoint = environment.apiUrl + environment.apiTaskPrefix + '/allParentTasks';
   addParentTaskAPIEndpoint = environment.apiUrl + environment.apiTaskPrefix + '/addParentTask';
   addTaskAPIEndpoint = environment.apiUrl + environment.apiTaskPrefix + '/addTask';
+  taskByIdAPIEndpoint = environment.apiUrl + environment.apiTaskPrefix;
 
   constructor(private http: HttpClient) { }
 
@@ -49,6 +50,17 @@ export class TaskService {
   addTask(task: Task) {
     console.log('TaskService : adding task.');
     return this.http.post<Task>(this.addTaskAPIEndpoint, task, this.httpOptions)
+    .pipe(
+      tap(
+        result => console.log(JSON.stringify(result)),
+        catchError(this.handleError)
+      )
+    );
+  }
+
+  getTaskById(taskId: number) {
+    console.log('TaskService : get task by id.');
+    return this.http.get<Task>(this.taskByIdAPIEndpoint + '/' + taskId)
     .pipe(
       tap(
         result => console.log(JSON.stringify(result)),

@@ -29,9 +29,9 @@
               &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               Task : &nbsp;
             <mat-form-field class="task-full-width">
-              <input matInput placeholder="Task" id="taskNameId" name="taskName" required
+              <input matInput placeholder="Task" id="taskName" name="taskName" required
               #taskName="ngModel"
-              [(ngModel)]="task.task">
+              [(ngModel)]="task.taskName">
             </mat-form-field>
 
             <mat-error [hidden]="!taskForm.submitted || taskName.valid">
@@ -105,10 +105,16 @@
             </mat-list-item>
 
             <mat-list-item>
-                <div class="task-button-row">
+                <div class="task-button-row" *ngIf="!edit">
                   <button mat-raised-button color="primary">Add Task</button>
                   <button mat-raised-button color="warn" (click)='this.taskForm.resetForm()' type="button">Reset</button>
                 </div>
+
+                <div class="task-button-row" *ngIf="edit">
+                  <button mat-raised-button color="primary">Edit Task</button>
+                  <button mat-raised-button color="warn" (click)='cancelEdit()' type="button">Canel</button>
+                </div>
+
             </mat-list-item>
 
         </mat-list>

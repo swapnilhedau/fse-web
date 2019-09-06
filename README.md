@@ -62,16 +62,19 @@ add below in package.json file under scripts
 > ng g class /domain/user
 > ng g class /domain/project
 > ng g class /domain/task
+> ng g class /domain/viewtask
 
 ## create component
 > ng g c users
 > ng g c projects
 > ng g c tasks
+> ng g c viewtasks
 
 ## create service 
 > ng g service /service/user
 > ng g service /service/project
 > ng g service /service/task
+> ng g service /service/viewtask
 
 
 

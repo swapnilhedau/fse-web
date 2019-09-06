@@ -8,7 +8,7 @@ import { Task } from '../domain/task';
 import { Parenttask } from '../domain/parenttask';
 import { TaskService } from '../service/task.service';
 import { Ptor } from 'protractor';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-tasks',
@@ -24,7 +24,7 @@ export class TasksComponent implements OnInit {
   users: User[];
   parentTasks: Parenttask[];
 
-  isParentTask: boolean;
+  isParentTask: false;
 
   @ViewChild('taskForm') formValue;
   taskForm: FormGroup;
@@ -33,7 +33,7 @@ export class TasksComponent implements OnInit {
     taskId: 0,
     parentId: 0,
     projectId: 0,
-    task: '',
+    taskName: '',
     startDate: null,
     endDate: null,
     priority: 0,
@@ -41,8 +41,15 @@ export class TasksComponent implements OnInit {
     userId: 0
   };
 
+  edit: boolean;
+
   constructor(private projectService: ProjectService, private userService: UserService,
-              private taskService: TaskService, private router: Router) {
+              private taskService: TaskService, private router: Router,
+              private route: ActivatedRoute) {
+                console.log('taskId - ' + this.route.snapshot.paramMap.get('taskId'));
+                if (null != this.route.snapshot.paramMap.get('taskId')) {
+                  this.updateTask(Number(this.route.snapshot.paramMap.get('taskId')));
+                }
   }
 
   ngOnInit() {
@@ -75,7 +82,7 @@ export class TasksComponent implements OnInit {
 
   submitTaskForm(taskForm: NgForm) {
     if (taskForm.valid) {
-      if(this.isParentTask) {
+      if (this.isParentTask) {
         console.log('## submitting TaskForm for parent task ##' + this.isParentTask);
         this.taskService.addParentTask(new Parenttask(null, taskForm.value.taskName))
         .subscribe(
@@ -87,7 +94,7 @@ export class TasksComponent implements OnInit {
           , error => console.error(error)
         );
       } else {
-        console.log('## submitting TaskForm for parent task ##' + this.isParentTask);
+        console.log('## submitting TaskForm for task task ##' + this.isParentTask);
         this.taskService.addTask(taskForm.value)
         .subscribe(
           response => {
@@ -99,6 +106,23 @@ export class TasksComponent implements OnInit {
         );
       }
     }
+  }
+
+  updateTask(taskId: number) {
+    this.edit = true;
+    this.taskService.getTaskById(taskId)
+    .subscribe(
+      response => {
+          this.task = response;
+          console.log('get user to edit.');
+        }
+      , error => console.error()
+    );
+  }
+
+  cancelEdit() {
+    this.edit = false;
+    this.router.navigateByUrl('task');
   }
 
 }

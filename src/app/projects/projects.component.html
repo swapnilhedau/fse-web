@@ -74,8 +74,9 @@
   </div>
 
       <div class="card-body">
+          <mat-divider></mat-divider>
           <mat-form-field class="project-full-width">
-            <input matInput class="form-control" [(ngModel)]="projectSearchText" placeholder="Search..."/>
+            <input matInput class="form-control" [(ngModel)]="projectSearchText" placeholder="Search by Project name..."/>
           </mat-form-field>
           <br>
           Sort By :
@@ -90,17 +91,19 @@
               <tbody>
                   <tr *ngFor="let project of projects | projectfilter: projectSearchText">
                       <td>
+                          <mat-card>
                             Project : {{ project.projectName }} <br><br>
                             No of Tasks : {{ project.noOfTasks }} &nbsp; Completed : {{ project.completed }} <br>
                             Status : {{ project.projectStatus}} <br>
-                            Start Date : {{ project.startDate | date }} &nbsp; &nbsp; End Date : {{ project.endDate | date }} <br>
-
+                            Start Date : {{ project.startDate | date: 'dd/MM/yyyy' }} &nbsp; &nbsp; End Date : {{ project.endDate | date: 'dd/MM/yyyy' }} <br>
+                          </mat-card>
                       </td>
-                      <td> Priority : {{ project.priority }}</td>
+                      <td> Priority : {{ project.priority }} </td>
                       <td nowrap>
                           <button mat-raised-button color="primary" (click)='updateProject(project.projectId)'>Update</button> <br><br>
                           <button *ngIf="project.projectStatus != 'SUSPENDED'" mat-raised-button color="warn" (click)='suspendProject(project.projectId)'>Suspend</button>
-                      </tr>
+                      </td>
+                    </tr>
               </tbody>
             </table>
           </div>

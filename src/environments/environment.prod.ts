@@ -3,5 +3,6 @@ export const environment = {
   apiUrl: 'http://localhost:8081',
   apiUserPrefix: '/user/',
   apiProjectPrefix: '/project/',
-  apiTaskPrefix: '/task/'
+  apiTaskPrefix: '/task/',
+  apiViewTaskPrefix: '/viewtask'
 };

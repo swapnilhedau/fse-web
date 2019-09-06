@@ -43,9 +43,6 @@ export class TasksComponent implements OnInit {
 
   constructor(private projectService: ProjectService, private userService: UserService,
               private taskService: TaskService, private router: Router) {
-    this.getProjectDetails();
-    this.getUserDetails();
-    this.getParentTasks();
   }
 
   ngOnInit() {

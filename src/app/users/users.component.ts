@@ -28,7 +28,9 @@ export class UsersComponent implements OnInit {
   edit: boolean;
 
   constructor(private userService: UserService, private router: Router) {
-    console.log('app-users constructor');
+  }
+
+  ngOnInit() {
     this.getUserDetails();
   }
 
@@ -36,11 +38,6 @@ export class UsersComponent implements OnInit {
     this.userService.getUserDetails().subscribe(
       response => this.users = response,
       error => console.error(error));
-  }
-
-  ngOnInit() {
-    console.log('app-users ngOnInit');
-    this.getUserDetails();
   }
 
   submitUserForm(userForm: NgForm) {

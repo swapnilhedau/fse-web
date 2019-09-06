@@ -40,8 +40,6 @@ export class ProjectsComponent implements OnInit {
   isAsc = true;
 
   constructor(private projectService: ProjectService, private userService: UserService, private router: Router) {
-    this.getProjectDetails();
-    this.getUserDetails();
   }
 
   ngOnInit() {

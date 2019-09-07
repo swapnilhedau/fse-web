@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Viewtask } from '../domain/viewtask';
 import { ViewtaskService } from '../service/viewtask.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-viewtasks',
@@ -15,7 +16,9 @@ export class ViewtasksComponent implements OnInit {
 
   isAsc = true;
 
-  constructor(private viewTaskService: ViewtaskService, private router: Router) { }
+  constructor(private viewTaskService: ViewtaskService,
+              private router: Router,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.getViewTasks();
@@ -29,8 +32,14 @@ export class ViewtasksComponent implements OnInit {
 
   endTask(taskId: number) {
     this.viewTaskService.endTask(taskId).subscribe(
-      response => this.getViewTasks(),
-      error => console.error(error)
+      response => {
+        this.getViewTasks();
+        this.openSnackBar('Task ended.', 'Success', 'green-snackbar');
+      },
+      error => {
+        console.error(error);
+        this.openSnackBar('Error ending Task.', 'Error', 'red-snackbar');
+      }
     );
   }
 
@@ -67,6 +76,13 @@ export class ViewtasksComponent implements OnInit {
 
   compare(a: number | string | Date, b: number | string | Date, isAsc: boolean) {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  }
+
+  openSnackBar(message: string, action: string, className: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+      panelClass: [className]
+    });
   }
 
 }

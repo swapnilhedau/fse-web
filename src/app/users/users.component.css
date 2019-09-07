@@ -30,3 +30,7 @@ mat-form-field {
   width: 60%;
 }
 
+mat-form-field {
+  margin-right: 12px;
+}
+

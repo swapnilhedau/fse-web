@@ -5,6 +5,7 @@ import { UserService } from '../service/user.service';
 import { Router } from '@angular/router';
 import { FormGroup, NgForm } from '@angular/forms';
 import { User } from '../domain/user';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-projects',
@@ -39,7 +40,10 @@ export class ProjectsComponent implements OnInit {
   projectSearchText: '';
   isAsc = true;
 
-  constructor(private projectService: ProjectService, private userService: UserService, private router: Router) {
+  constructor(private projectService: ProjectService,
+              private userService: UserService,
+              private router: Router,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -70,9 +74,12 @@ export class ProjectsComponent implements OnInit {
                       this.edit = false;
                       this.getProjectDetails();
                       this.formValue.resetForm();
-                      this.router.navigateByUrl('project');
+                      this.openSnackBar('Project edited.', 'Success', 'green-snackbar');
                   }
-            , error => console.error(error)
+            , error => {
+              console.error(error);
+              this.openSnackBar('Error editing Project. Try again.', 'Error', 'red-snackbar');
+            }
           );
       } else {
         this.projectService.addProject(projectForm.value)
@@ -80,9 +87,12 @@ export class ProjectsComponent implements OnInit {
           response => {
                     this.getProjectDetails();
                     this.formValue.resetForm();
-                    this.router.navigateByUrl('project');
+                    this.openSnackBar('Project updated.', 'Success', 'green-snackbar');
                 }
-          , error => console.error(error)
+          , error => {
+            console.error(error);
+            this.openSnackBar('Error updating Project. Try again.', 'Error', 'red-snackbar');
+          }
         );
       }
 
@@ -91,8 +101,14 @@ export class ProjectsComponent implements OnInit {
 
   suspendProject(projectId: number) {
     this.projectService.suspendProject(projectId).subscribe(
-      response => this.getProjectDetails(),
-      error => console.error(error)
+      response => {
+        this.getProjectDetails();
+        this.openSnackBar('Project suspended.', 'Success', 'green-snackbar');
+      },
+      error => {
+        console.error(error);
+        this.openSnackBar('Error suspending Project. Try again.', 'Error', 'red-snackbar');
+      }
     );
   }
 
@@ -140,6 +156,13 @@ export class ProjectsComponent implements OnInit {
 
   compare(a: number | string | Date, b: number | string | Date, isAsc: boolean) {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  }
+
+  openSnackBar(message: string, action: string, className: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+      panelClass: [className]
+    });
   }
 
 }

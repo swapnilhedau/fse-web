@@ -3,6 +3,7 @@ import { UserService } from '../service/user.service';
 import { Router } from '@angular/router';
 import { User } from '../domain/user';
 import { NgForm, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-users',
@@ -27,7 +28,9 @@ export class UsersComponent implements OnInit {
 
   edit: boolean;
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private userService: UserService,
+              private router: Router,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -49,9 +52,12 @@ export class UsersComponent implements OnInit {
                       this.edit = false;
                       this.getUserDetails();
                       this.formValue.resetForm();
-                      this.router.navigateByUrl('user');
+                      this.openSnackBar('User edited.', 'Success', 'green-snackbar');
                   }
-            , error => console.error(error)
+            , error => {
+              console.error(error);
+              this.openSnackBar('Error editing User. Try again', 'Error', 'red-snackbar');
+            }
           );
       } else {
         this.userService.addUser(userForm.value)
@@ -59,9 +65,12 @@ export class UsersComponent implements OnInit {
           response => {
                     this.getUserDetails();
                     this.formValue.resetForm();
-                    this.router.navigateByUrl('user');
+                    this.openSnackBar('User added.', 'Success', 'green-snackbar');
                 }
-          , error => console.error(error)
+          , error => {
+            console.error(error);
+            this.openSnackBar('Error adding User. Try again', 'Error', 'red-snackbar');
+          }
         );
       }
 
@@ -91,10 +100,20 @@ export class UsersComponent implements OnInit {
         response => {
                   this.getUserDetails();
                   this.formValue.resetForm();
-                  this.router.navigateByUrl('user');
+                  this.openSnackBar('User deleted.', 'Success', 'green-snackbar');
                 }
-        , error => console.error(error)
+        , error => {
+          console.error(error);
+          this.openSnackBar('Error deleting User. Try again.', 'Error', 'red-snackbar');
+        }
       );
+  }
+
+  openSnackBar(message: string, action: string, className: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+      panelClass: [className]
+    });
   }
 
 }

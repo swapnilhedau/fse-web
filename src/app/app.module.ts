@@ -10,6 +10,7 @@ import { UsersComponent } from './users/users.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { ProjectfilterPipe } from './filter/projectfilter.pipe';
+import { ViewtasksComponent } from './viewtasks/viewtasks.component';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTableModule} from '@angular/material/table';
@@ -28,8 +29,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { ViewtasksComponent } from './viewtasks/viewtasks.component';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -63,7 +63,8 @@ import { ViewtasksComponent } from './viewtasks/viewtasks.component';
     MatNativeDateModule,
     MatSliderModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

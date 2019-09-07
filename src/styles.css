@@ -9,3 +9,11 @@ div.container {
 .fill-remaining-space {
   flex: 1 1 auto;
 }
+
+.green-snackbar {
+  background: #007bff
+}
+
+.red-snackbar {
+  background: red
+}

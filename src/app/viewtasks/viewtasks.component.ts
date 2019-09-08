@@ -14,6 +14,8 @@ export class ViewtasksComponent implements OnInit {
   viewTasks: Viewtask[];
   displayedColumns: string[] = ['task', 'parent', 'priority', 'start', 'end', 'actions'];
 
+  projectSearchText: '';
+
   isAsc = true;
 
   constructor(private viewTaskService: ViewtaskService,

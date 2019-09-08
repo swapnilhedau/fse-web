@@ -4,6 +4,8 @@
 
     <form #taskForm=ngForm (ngSubmit)="submitTaskForm(taskForm)">
 
+      <input type="hidden" id="taskId" name="taskId" [(ngModel)]="task.taskId">
+      <input type="hidden" id="parentId" name="parentId" [(ngModel)]="task.parentId">
       <input type="hidden" id="status" name="status" [(ngModel)]="task.status">
 
       <mat-list>
@@ -120,7 +122,7 @@
         </mat-list>
 
     </form>
-
+    {{ taskForm.value | json }}
   </div>
 
 </div>

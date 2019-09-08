@@ -20,7 +20,9 @@ export class TaskService {
 
   allParentTasksAPIEndpoint = environment.apiUrl + environment.apiTaskPrefix + '/allParentTasks';
   addParentTaskAPIEndpoint = environment.apiUrl + environment.apiTaskPrefix + '/addParentTask';
+  editParentTaskAPIEndpoint = environment.apiUrl + environment.apiTaskPrefix + '/editParentTask';
   addTaskAPIEndpoint = environment.apiUrl + environment.apiTaskPrefix + '/addTask';
+  editTaskAPIEndpoint = environment.apiUrl + environment.apiTaskPrefix + '/editTask';
   taskByIdAPIEndpoint = environment.apiUrl + environment.apiTaskPrefix;
 
   constructor(private http: HttpClient) { }
@@ -47,9 +49,31 @@ export class TaskService {
     );
   }
 
+  editParentTask(parenttask: Parenttask, parentId: number) {
+    console.log('TaskService : editing parent task.');
+    return this.http.post<Parenttask>(this.editParentTaskAPIEndpoint + '/' + parentId, parenttask, this.httpOptions)
+    .pipe(
+      tap(
+        result => console.log(JSON.stringify(result)),
+        catchError(this.handleError)
+      )
+    );
+  }
+
   addTask(task: Task) {
     console.log('TaskService : adding task.');
     return this.http.post<Task>(this.addTaskAPIEndpoint, task, this.httpOptions)
+    .pipe(
+      tap(
+        result => console.log(JSON.stringify(result)),
+        catchError(this.handleError)
+      )
+    );
+  }
+
+  editTask(task: Task, taskId: number) {
+    console.log('TaskService : editing task.');
+    return this.http.post<Task>(this.editTaskAPIEndpoint + '/' + taskId, task, this.httpOptions)
     .pipe(
       tap(
         result => console.log(JSON.stringify(result)),

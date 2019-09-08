@@ -88,32 +88,62 @@ export class TasksComponent implements OnInit {
     if (taskForm.valid) {
       if (this.isParentTask) {
         console.log('## submitting TaskForm for parent task ##' + this.isParentTask);
-        this.taskService.addParentTask(new Parenttask(null, taskForm.value.taskName))
-        .subscribe(
-          response => {
-                    this.getParentTasks();
-                    this.formValue.resetForm();
-                    this.openSnackBar('Parent Task added.', 'Success', 'green-snackbar');
-          }
-          , error => {
-            console.error(error);
-            this.openSnackBar('Error adding Parent Task. Try again', 'Error', 'red-snackbar');
-          }
-        );
+        if (!this.edit) {
+          this.taskService.addParentTask(new Parenttask(null, taskForm.value.taskName))
+          .subscribe(
+            response => {
+                      this.getParentTasks();
+                      this.formValue.resetForm();
+                      this.openSnackBar('Parent Task added.', 'Success', 'green-snackbar');
+            }
+            , error => {
+              console.error(error);
+              this.openSnackBar('Error adding Parent Task. Try again', 'Error', 'red-snackbar');
+            }
+          );
+        } else {
+          this.taskService.editParentTask(new Parenttask(taskForm.value.parentId, taskForm.value.taskName), taskForm.value.parentId)
+          .subscribe(
+            response => {
+                      this.getParentTasks();
+                      this.formValue.resetForm();
+                      this.openSnackBar('Parent Task added.', 'Success', 'green-snackbar');
+            }
+            , error => {
+              console.error(error);
+              this.openSnackBar('Error adding Parent Task. Try again', 'Error', 'red-snackbar');
+            }
+          );
+        }
       } else {
         console.log('## submitting TaskForm for task ##' + this.isParentTask);
-        this.taskService.addTask(taskForm.value)
-        .subscribe(
-          response => {
-                    this.getParentTasks();
-                    this.formValue.resetForm();
-                    this.openSnackBar('Task added.', 'Success', 'green-snackbar');
-          }
-          , error => {
-            console.error(error);
-            this.openSnackBar('Error adding Task. Try again', 'Error', 'red-snackbar');
-          }
-        );
+        if (!this.edit) {
+          this.taskService.addTask(taskForm.value)
+          .subscribe(
+            response => {
+                      this.getParentTasks();
+                      this.formValue.resetForm();
+                      this.openSnackBar('Task added.', 'Success', 'green-snackbar');
+            }
+            , error => {
+              console.error(error);
+              this.openSnackBar('Error adding Task. Try again', 'Error', 'red-snackbar');
+            }
+          );
+        } else {
+          this.taskService.editTask(taskForm.value, taskForm.value.taskId)
+          .subscribe(
+            response => {
+                      this.getParentTasks();
+                      this.formValue.resetForm();
+                      this.openSnackBar('Task edited.', 'Success', 'green-snackbar');
+            }
+            , error => {
+              console.error(error);
+              this.openSnackBar('Error editing Task. Try again', 'Error', 'red-snackbar');
+            }
+          );
+        }
       }
     }
   }

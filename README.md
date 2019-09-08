@@ -37,7 +37,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 ## Install angular material
-npm install --save @angular/material@7.3.7 @angular/cdk@7.3.7 @angular/animations@7.3.7
+npm install --save @angular/material@7.3.7 @angular/cdk@7.3.7 @angular/animations@7.0.3
 
 
 ## Add Theme
@@ -81,7 +81,7 @@ add below in package.json file under scripts
 ## Build docker image
 > cd fse-web
 > ng build --prod
-> docker build -t fse-web:latest
+> docker build -t fse-web:latest .
 
 ## Run image
 > docker run --name fse-web -d -p 8080:80 fse-web:latest

@@ -7,8 +7,8 @@ import { Project } from '../domain/project';
 export class ProjectfilterPipe implements PipeTransform {
 
   transform(items: Project[], searchText: string): any[] {
-    console.log('items ### - ' + items);
-    console.log('project name search text ### - ' + searchText);
+    // console.log('items ### - ' + items);
+    // console.log('project name search text ### - ' + searchText);
 
     if (!items) {
       return [];

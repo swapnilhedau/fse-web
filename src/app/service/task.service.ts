@@ -28,10 +28,10 @@ export class TaskService {
   constructor(private http: HttpClient) { }
 
   getParentTasks(): Observable<Parenttask[]> {
-    console.log('TaskService : get all Parent Tasks' + this.allParentTasksAPIEndpoint);
+    // console.log('TaskService : get all Parent Tasks' + this.allParentTasksAPIEndpoint);
     return this.http.get<Parenttask[]>(this.allParentTasksAPIEndpoint).pipe(
       tap(
-        data => console.log(JSON.stringify(data)),
+        data => // console.log(JSON.stringify(data)),
         catchError(this.handleError)
       )
     );
@@ -39,55 +39,55 @@ export class TaskService {
   }
 
   addParentTask(parenttask: Parenttask) {
-    console.log('TaskService : adding parent task.');
+    // console.log('TaskService : adding parent task.');
     return this.http.post<Parenttask>(this.addParentTaskAPIEndpoint, parenttask, this.httpOptions)
     .pipe(
       tap(
-        result => console.log(JSON.stringify(result)),
+        result => // console.log(JSON.stringify(result)),
         catchError(this.handleError)
       )
     );
   }
 
   editParentTask(parenttask: Parenttask, parentId: number) {
-    console.log('TaskService : editing parent task.');
+    // console.log('TaskService : editing parent task.');
     return this.http.post<Parenttask>(this.editParentTaskAPIEndpoint + '/' + parentId, parenttask, this.httpOptions)
     .pipe(
       tap(
-        result => console.log(JSON.stringify(result)),
+        result => // console.log(JSON.stringify(result)),
         catchError(this.handleError)
       )
     );
   }
 
   addTask(task: Task) {
-    console.log('TaskService : adding task.');
+    // console.log('TaskService : adding task.');
     return this.http.post<Task>(this.addTaskAPIEndpoint, task, this.httpOptions)
     .pipe(
       tap(
-        result => console.log(JSON.stringify(result)),
+        result => // console.log(JSON.stringify(result)),
         catchError(this.handleError)
       )
     );
   }
 
   editTask(task: Task, taskId: number) {
-    console.log('TaskService : editing task.');
+    // console.log('TaskService : editing task.');
     return this.http.post<Task>(this.editTaskAPIEndpoint + '/' + taskId, task, this.httpOptions)
     .pipe(
       tap(
-        result => console.log(JSON.stringify(result)),
+        result => // console.log(JSON.stringify(result)),
         catchError(this.handleError)
       )
     );
   }
 
   getTaskById(taskId: number) {
-    console.log('TaskService : get task by id.');
+    // console.log('TaskService : get task by id.');
     return this.http.get<Task>(this.taskByIdAPIEndpoint + '/' + taskId)
     .pipe(
       tap(
-        result => console.log(JSON.stringify(result)),
+        result => // console.log(JSON.stringify(result)),
         catchError(this.handleError)
       )
     );
@@ -100,7 +100,7 @@ export class TaskService {
     } else {
       errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
     }
-    console.error(errorMessage);
+    // console.error(errorMessage);
     return throwError(errorMessage);
   }
 

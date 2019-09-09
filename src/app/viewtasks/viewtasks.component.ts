@@ -29,7 +29,8 @@ export class ViewtasksComponent implements OnInit {
   getViewTasks() {
     this.viewTaskService.getViewTasks().subscribe(
       response => this.viewTasks = response,
-      error => console.error(error));
+      // error => console.error(error)
+      );
   }
 
   endTask(taskId: number) {
@@ -39,14 +40,14 @@ export class ViewtasksComponent implements OnInit {
         this.openSnackBar('Task ended.', 'Success', 'green-snackbar');
       },
       error => {
-        console.error(error);
+        // console.error(error);
         this.openSnackBar('Error ending Task.', 'Error', 'red-snackbar');
       }
     );
   }
 
   editTask(taskId: number) {
-    console.log(taskId);
+    // console.log(taskId);
     this.router.navigateByUrl('task/' + taskId);
   }
 
@@ -54,22 +55,22 @@ export class ViewtasksComponent implements OnInit {
     this.isAsc = !this.isAsc;
     switch (sortby) {
       case 'SD' : {
-        console.log('sorting by start date');
+        // console.log('sorting by start date');
         this.viewTasks.sort((a, b) => this.compare(a.task.startDate, b.task.startDate, this.isAsc));
         break;
       }
       case 'ED': {
-        console.log('sorting by end date');
+        // console.log('sorting by end date');
         this.viewTasks.sort((a, b) => this.compare(a.task.endDate, b.task.endDate, this.isAsc));
         break;
       }
       case 'PR': {
-        console.log('sorting by project priority');
+        // console.log('sorting by project priority');
         this.viewTasks.sort((a, b) => this.compare(a.task.priority, b.task.priority, this.isAsc));
         break;
       }
       default: {
-        console.log('sorting by task completed');
+        // console.log('sorting by task completed');
         this.viewTasks.sort((a, b) => this.compare(a.task.status, b.task.status, this.isAsc));
         break;
       }

@@ -54,15 +54,16 @@ export class ProjectsComponent implements OnInit {
   getProjectDetails() {
     this.projectService.getProjectDetails()
     .subscribe(
-      result => this.projects = result,
-      error => console.error(error)
+      result => this.projects = result
+      // , error => console.error(error)
     );
   }
 
   getUserDetails() {
     this.userService.getUserDetails().subscribe(
-      response => this.users = response,
-      error => console.error(error));
+      response => this.users = response
+      // ,error => console.error(error)
+      );
   }
 
   submitProjectForm(projectForm: NgForm) {
@@ -77,7 +78,7 @@ export class ProjectsComponent implements OnInit {
                       this.openSnackBar('Project edited.', 'Success', 'green-snackbar');
                   }
             , error => {
-              console.error(error);
+              // console.error(error);
               this.openSnackBar('Error editing Project. Try again.', 'Error', 'red-snackbar');
             }
           );
@@ -90,7 +91,7 @@ export class ProjectsComponent implements OnInit {
                     this.openSnackBar('Project updated.', 'Success', 'green-snackbar');
                 }
           , error => {
-            console.error(error);
+            // console.error(error);
             this.openSnackBar('Error updating Project. Try again.', 'Error', 'red-snackbar');
           }
         );
@@ -106,7 +107,7 @@ export class ProjectsComponent implements OnInit {
         this.openSnackBar('Project suspended.', 'Success', 'green-snackbar');
       },
       error => {
-        console.error(error);
+        // console.error(error);
         this.openSnackBar('Error suspending Project. Try again.', 'Error', 'red-snackbar');
       }
     );
@@ -118,9 +119,9 @@ export class ProjectsComponent implements OnInit {
     .subscribe(
       response => {
           this.project = response;
-          console.log('get user to edit.');
+          // console.log('get user to edit.');
         }
-      , error => console.error()
+      // , error => console.error()
     );
   }
 
@@ -133,22 +134,22 @@ export class ProjectsComponent implements OnInit {
     this.isAsc = !this.isAsc;
     switch (sortby) {
       case 'SD' : {
-        console.log('sorting by start date');
+        // console.log('sorting by start date');
         this.projects.sort((a, b) => this.compare(a.startDate, b.startDate, this.isAsc));
         break;
       }
       case 'ED': {
-        console.log('sorting by end date');
+        // console.log('sorting by end date');
         this.projects.sort((a, b) => this.compare(a.endDate, b.endDate, this.isAsc));
         break;
       }
       case 'PR': {
-        console.log('sorting by project priority');
+        // console.log('sorting by project priority');
         this.projects.sort((a, b) => this.compare(a.priority, b.priority, this.isAsc));
         break;
       }
       default: {
-        console.log('sorting by task completed');
+        // console.log('sorting by task completed');
         break;
       }
     }

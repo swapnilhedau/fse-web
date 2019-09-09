@@ -28,54 +28,54 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUserDetails(): Observable<User[]> {
-    console.log('UserService : get all users - ' + this.allUsersAPIEndpoint);
+    // console.log('UserService : get all users - ' + this.allUsersAPIEndpoint);
     return this.http.get<User[]>(this.allUsersAPIEndpoint).pipe(
       tap(
-        data => console.log(JSON.stringify(data)),
+        data => // console.log(JSON.stringify(data)),
         catchError(this.handleError)
       )
     );
   }
 
   addUser(user: User) {
-    console.log('UserService : adding user.' + user);
+    // console.log('UserService : adding user.' + user);
     return this.http.post<User>(this.addUserAPIEndpoint, user, this.httpOptions)
     .pipe(
       tap(
-        result => console.log(JSON.stringify(result)),
+        result => // console.log(JSON.stringify(result)),
         catchError(this.handleError)
       )
     );
   }
 
   editUser(user: User, userId: number) {
-    console.log('UserService : editing user.');
+    // console.log('UserService : editing user.');
     return this.http.post<User>(this.editUserAPIEndpoint + '/' + userId, user, this.httpOptions)
     .pipe(
       tap(
-        result => console.log(JSON.stringify(result)),
+        result => // console.log(JSON.stringify(result)),
         catchError(this.handleError)
       )
     );
   }
 
   getUserById(userId: number): Observable<User> {
-    console.log('UserService : get user by id.');
+    // console.log('UserService : get user by id.');
     return this.http.get<User>(this.userByIdAPIEndpoint + '/' + userId)
     .pipe(
       tap(
-        result => console.log(JSON.stringify(result)),
+        result => // console.log(JSON.stringify(result)),
         catchError(this.handleError)
       )
     );
   }
 
   deleteUser(userId: number): Observable<string> {
-    console.log('UserService : deleting user.');
+    // console.log('UserService : deleting user.');
     return this.http.delete<string>(this.deleteUserAPIEndpoint + '/' + userId)
     .pipe(
       tap(
-        result => console.log(JSON.stringify(result)),
+        result => // console.log(JSON.stringify(result)),
         catchError(this.handleError)
       )
     );
@@ -88,7 +88,7 @@ export class UserService {
     } else {
       errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
     }
-    console.error(errorMessage);
+    // console.error(errorMessage);
     return throwError(errorMessage);
   }
 }

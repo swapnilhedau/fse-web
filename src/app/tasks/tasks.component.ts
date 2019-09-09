@@ -50,7 +50,7 @@ export class TasksComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               private snackBar: MatSnackBar) {
-                console.log('taskId - ' + this.route.snapshot.paramMap.get('taskId'));
+                // console.log('taskId - ' + this.route.snapshot.paramMap.get('taskId'));
                 if (null != this.route.snapshot.paramMap.get('taskId')) {
                   this.updateTask(Number(this.route.snapshot.paramMap.get('taskId')));
                 }
@@ -65,29 +65,30 @@ export class TasksComponent implements OnInit {
   getProjectDetails() {
     this.projectService.getProjectDetails()
     .subscribe(
-      result => this.projects = result,
-      error => console.error(error)
+      result => this.projects = result
+      // ,error => console.error(error)
     );
   }
 
   getUserDetails() {
     this.userService.getUserDetails().subscribe(
-      response => this.users = response,
-      error => console.error(error));
+      response => this.users = response
+      // ,error => console.error(error)
+    );
   }
 
   getParentTasks() {
     this.taskService.getParentTasks()
     .subscribe(
-      result => this.parentTasks = result,
-      error => console.error(error)
+      result => this.parentTasks = result
+      // ,error => console.error(error)
     );
   }
 
   submitTaskForm(taskForm: NgForm) {
     if (taskForm.valid) {
       if (this.isParentTask) {
-        console.log('## submitting TaskForm for parent task ##' + this.isParentTask);
+        // console.log('## submitting TaskForm for parent task ##' + this.isParentTask);
         if (!this.edit) {
           this.taskService.addParentTask(new Parenttask(null, taskForm.value.taskName))
           .subscribe(
@@ -97,7 +98,7 @@ export class TasksComponent implements OnInit {
                       this.openSnackBar('Parent Task added.', 'Success', 'green-snackbar');
             }
             , error => {
-              console.error(error);
+              // console.error(error);
               this.openSnackBar('Error adding Parent Task. Try again', 'Error', 'red-snackbar');
             }
           );
@@ -110,13 +111,13 @@ export class TasksComponent implements OnInit {
                       this.openSnackBar('Parent Task added.', 'Success', 'green-snackbar');
             }
             , error => {
-              console.error(error);
+              // console.error(error);
               this.openSnackBar('Error adding Parent Task. Try again', 'Error', 'red-snackbar');
             }
           );
         }
       } else {
-        console.log('## submitting TaskForm for task ##' + this.isParentTask);
+        // console.log('## submitting TaskForm for task ##' + this.isParentTask);
         if (!this.edit) {
           this.taskService.addTask(taskForm.value)
           .subscribe(
@@ -126,7 +127,7 @@ export class TasksComponent implements OnInit {
                       this.openSnackBar('Task added.', 'Success', 'green-snackbar');
             }
             , error => {
-              console.error(error);
+              // console.error(error);
               this.openSnackBar('Error adding Task. Try again', 'Error', 'red-snackbar');
             }
           );
@@ -139,7 +140,7 @@ export class TasksComponent implements OnInit {
                       this.openSnackBar('Task edited.', 'Success', 'green-snackbar');
             }
             , error => {
-              console.error(error);
+              // console.error(error);
               this.openSnackBar('Error editing Task. Try again', 'Error', 'red-snackbar');
             }
           );
@@ -159,9 +160,9 @@ export class TasksComponent implements OnInit {
           } else {
             this.isParentTask = false;
           }
-          console.log('get task to edit.' + this.task.parentId);
+          // console.log('get task to edit.' + this.task.parentId);
         }
-      , error => console.error()
+      // , error => console.error()
     );
   }
 

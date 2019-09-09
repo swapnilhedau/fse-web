@@ -24,10 +24,10 @@ export class ViewtaskService {
   constructor(private http: HttpClient) { }
 
   getViewTasks(): Observable<Viewtask[]> {
-    console.log('ViewtaskService : get all viewtask - ' + this.allViewTasksAPIEndpoint);
+    // console.log('ViewtaskService : get all viewtask - ' + this.allViewTasksAPIEndpoint);
     return this.http.get<Viewtask[]>(this.allViewTasksAPIEndpoint).pipe(
       tap(
-        data => console.log(JSON.stringify(data)),
+        data => // console.log(JSON.stringify(data)),
         catchError(this.handleError)
       )
     );
@@ -36,10 +36,10 @@ export class ViewtaskService {
 
 
   endTask(taskId: number) {
-    console.log('ViewServiceService : end task');
+    // console.log('ViewServiceService : end task');
     return this.http.get<number>(this.endTaskAPIEndpoint + '/' + taskId).pipe(
       tap(
-        data => console.log(JSON.stringify(data)),
+        data => // console.log(JSON.stringify(data)),
         catchError(this.handleError)
       )
     );
@@ -52,7 +52,7 @@ export class ViewtaskService {
     } else {
       errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
     }
-    console.error(errorMessage);
+    // console.error(errorMessage);
     return throwError(errorMessage);
   }
 }

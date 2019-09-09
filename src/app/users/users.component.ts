@@ -40,7 +40,8 @@ export class UsersComponent implements OnInit {
   getUserDetails() {
     this.userService.getUserDetails().subscribe(
       response => this.users = response,
-      error => console.error(error));
+      // error => console.error(error)
+      );
   }
 
   submitUserForm(userForm: NgForm) {
@@ -55,7 +56,7 @@ export class UsersComponent implements OnInit {
                       this.openSnackBar('User edited.', 'Success', 'green-snackbar');
                   }
             , error => {
-              console.error(error);
+              // console.error(error);
               this.openSnackBar('Error editing User. Try again', 'Error', 'red-snackbar');
             }
           );
@@ -68,7 +69,7 @@ export class UsersComponent implements OnInit {
                     this.openSnackBar('User added.', 'Success', 'green-snackbar');
                 }
           , error => {
-            console.error(error);
+            // console.error(error);
             this.openSnackBar('Error adding User. Try again', 'Error', 'red-snackbar');
           }
         );
@@ -83,9 +84,9 @@ export class UsersComponent implements OnInit {
     .subscribe(
       response => {
           this.user = response;
-          console.log('get user to edit.');
+          // console.log('get user to edit.');
         }
-      , error => console.error()
+      // , error => console.error()
     );
   }
 
@@ -103,7 +104,7 @@ export class UsersComponent implements OnInit {
                   this.openSnackBar('User deleted.', 'Success', 'green-snackbar');
                 }
         , error => {
-          console.error(error);
+          // console.error(error);
           this.openSnackBar('Error deleting User. Try again.', 'Error', 'red-snackbar');
         }
       );

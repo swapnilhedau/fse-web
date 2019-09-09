@@ -27,7 +27,7 @@ export class ProjectService {
   constructor(private http: HttpClient) { }
 
   getProjectDetails(): Observable<Project[]> {
-    console.log('ProjectService : get all projects');
+    // console.log('ProjectService : get all projects');
     return this.http.get<Project[]>(this.allProjectsAPIEndpoint).pipe(
       tap(
         data => console.log(JSON.stringify(data)),
@@ -37,7 +37,7 @@ export class ProjectService {
   }
 
   suspendProject(projectId: number) {
-    console.log('ProjectService : suspend project');
+    // console.log('ProjectService : suspend project');
     return this.http.get<number>(this.suspendProjectAPIEndpoint + '/' + projectId).pipe(
       tap(
         data => console.log(JSON.stringify(data)),
@@ -47,11 +47,11 @@ export class ProjectService {
   }
 
   addProject(project: Project) {
-    console.log('ProjectService : adding project.');
+    // console.log('ProjectService : adding project.');
     return this.http.post<Project>(this.addProjectAPIEndpoint, project, this.httpOptions)
     .pipe(
       tap(
-        result => console.log(JSON.stringify(result)),
+        result => // console.log(JSON.stringify(result)),
         catchError(this.handleError)
       )
     );
@@ -62,7 +62,7 @@ export class ProjectService {
     return this.http.post<Project>(this.editProjectAPIEndpoint + '/' + projectId, project, this.httpOptions)
     .pipe(
       tap(
-        result => console.log(JSON.stringify(result)),
+        result => // console.log(JSON.stringify(result)),
         catchError(this.handleError)
       )
     );
@@ -73,7 +73,7 @@ export class ProjectService {
     return this.http.get<Project>(this.projectByIdAPIEndpoint + '/' + projectId)
     .pipe(
       tap(
-        result => console.log(JSON.stringify(result)),
+        result => // console.log(JSON.stringify(result)),
         catchError(this.handleError)
       )
     );
@@ -86,7 +86,7 @@ export class ProjectService {
     } else {
       errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
     }
-    console.error(errorMessage);
+    // console.error(errorMessage);
     return throwError(errorMessage);
   }
 

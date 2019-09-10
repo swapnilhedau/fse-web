@@ -30,7 +30,7 @@ export class ProjectService {
     // console.log('ProjectService : get all projects');
     return this.http.get<Project[]>(this.allProjectsAPIEndpoint).pipe(
       tap(
-        data => console.log(JSON.stringify(data)),
+        data => // console.log(JSON.stringify(data)),
         catchError(this.handleError)
       )
     );
@@ -40,7 +40,7 @@ export class ProjectService {
     // console.log('ProjectService : suspend project');
     return this.http.get<number>(this.suspendProjectAPIEndpoint + '/' + projectId).pipe(
       tap(
-        data => console.log(JSON.stringify(data)),
+        data => // console.log(JSON.stringify(data)),
         catchError(this.handleError)
       )
     );

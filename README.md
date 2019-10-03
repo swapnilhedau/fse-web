@@ -96,3 +96,5 @@ add below in package.json file under scripts
 ## Push local image to docker hub registry
 > docker tag fse-web:latest swapnilhedau/fse-web:latest
 > docker push swapnilhedau/fse-web:latest
+
+# Code Factor Rating [![CodeFactor](https://www.codefactor.io/repository/github/swapnilhedau/fse-web/badge)](https://www.codefactor.io/repository/github/swapnilhedau/fse-web)

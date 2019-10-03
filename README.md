@@ -97,4 +97,4 @@ add below in package.json file under scripts
 > docker tag fse-web:latest swapnilhedau/fse-web:latest
 > docker push swapnilhedau/fse-web:latest
 
-[![CodeFactor](https://www.codefactor.io/repository/github/swapnilhedau/fse-api/badge)](https://www.codefactor.io/repository/github/swapnilhedau/fse-api)
+# Code Factor Rating [![CodeFactor](https://www.codefactor.io/repository/github/swapnilhedau/fse-web/badge)](https://www.codefactor.io/repository/github/swapnilhedau/fse-web)

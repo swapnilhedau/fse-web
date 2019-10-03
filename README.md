@@ -98,3 +98,5 @@ add below in package.json file under scripts
 > docker push swapnilhedau/fse-web:latest
 
 # Code Factor Rating [![CodeFactor](https://www.codefactor.io/repository/github/swapnilhedau/fse-web/badge)](https://www.codefactor.io/repository/github/swapnilhedau/fse-web)
+
+# CirclCI status [![CircleCI](https://circleci.com/gh/swapnilhedau/fse-web/tree/master.svg?style=svg)](https://circleci.com/gh/swapnilhedau/fse-web/tree/master) 
